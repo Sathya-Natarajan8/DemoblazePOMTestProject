@@ -12,14 +12,18 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.DataProvider;
 
 public class UtilsClass {
 
 	public static WebDriver driver;
 	public String sheetname;
-	public  String testName, testDescription, testAuthor, testCategory;
+	public String testName, testDescription, testAuthor, testCategory;
 
 	public void browserLaunch(String browser, String url) {
 
@@ -41,7 +45,8 @@ public class UtilsClass {
 	}
 
 	public static String[][] readExcel(String sheetname) throws IOException {
-		XSSFWorkbook book = new XSSFWorkbook("C:\\Users\\sathy\\eclipse-workspace\\demoblazeProject\\src\\test\\resources\\DemoBlazePOMTestProject.xlsx");
+		XSSFWorkbook book = new XSSFWorkbook(
+				"C:\\Users\\sathy\\eclipse-workspace\\demoblazeProject\\src\\test\\resources\\DemoBlazePOMTestProject.xlsx");
 		XSSFSheet sheet = book.getSheet(sheetname);
 
 		int rowCount = sheet.getPhysicalNumberOfRows();
@@ -70,4 +75,28 @@ public class UtilsClass {
 		return path;
 
 	}
+
+	public static void waitForElementToDisappear(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.invisibilityOf(element));
+    }
+
+    public static void waitForAlertAndAccept() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.alertIsPresent());
+        driver.switchTo().alert().accept();
+    }
+    
+	public static void waitForPageLoad() {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+    @DataProvider(name = "PurchaseTest")
+    public static Object[][] getPurchaseData() throws IOException {
+        return readExcel("PurchaseTest");
+    }
 }
+

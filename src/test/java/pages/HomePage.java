@@ -77,4 +77,8 @@ public class HomePage extends ProjectSpecificationMethods {
 		driver.switchTo().alert().accept();
 		driver.navigate().back();
 	}
+    public LogoutPage clickLogout() {
+        return new LogoutPage(driver);
+    }
 }
+

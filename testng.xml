@@ -10,6 +10,11 @@
 		<parameter name="browser" value="Chrome"></parameter>
 		<classes>
 			<class name="test.TC001_SignUpTest" />
+			<class name="test.TC002_LoginTest" />
+			<class name="test.TC003_ProductCategoryTest" />
+			<class name="test.TC004_AddToCartTest" />
+			<class name="test.TC005_CartTest" />
+			<class name="test.TC006_PurchaseTest"/>		
 		</classes>
 	</test> <!--
 	Test -->
